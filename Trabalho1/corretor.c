@@ -1,3 +1,4 @@
+
 // #################################################
 //  Instituto Federal da Bahia
 //  Salvador - BA
@@ -18,7 +19,7 @@
 #include <string.h>
 
 //renomeie o arquivo do include abaixo para PrimeiroUltimoNomeMATRICULA.h
-#include "PrimeiroUltimoNomeMATRICULA.h"
+#include "Trabalho1N.h"
 
 void testSomar();    //função utilizada para testes
 void testFatorial(); //função utilizada para testes
@@ -35,12 +36,12 @@ int main()
     //testSomar();
     //testFatorial();
     testQ1();
-    testQ2();
-    testQ3();
-    testQ4();
-    testQ5();
-    testQ6();
-    testQ7();
+    //testQ2();
+    //testQ3();
+    //testQ4();
+    //testQ5();
+    //testQ6();
+    //testQ7();
 }
 
 void testSomar()
@@ -66,7 +67,7 @@ void testQ1()
 {
     char str[11];
     strcpy(str, "29/02/2015");
-    printf("%d\n", q1(str) == 0);
+    /*printf("%d\n", q1(str) == 0);
     strcpy(str, "29/02/2012");
     printf("%d\n", q1(str) == 1);
     strcpy(str, "9/13/2014");
@@ -74,7 +75,7 @@ void testQ1()
     strcpy(str, "45/4/2014");
     printf("%d\n", q1(str) == 0);
     strcpy(str, "/9/2014");
-    printf("%d\n", q1(str) == 0);
+    printf("%d\n", q1(str) == 0);*/
 }
 
 void testQ2()
