@@ -11,8 +11,8 @@
 //  O aluno deve preencher seus dados abaixo, e implementar as questões do trabalho
 
 //  ----- Dados do Aluno -----
-//  Nome:
-//  email:
+//  Nome: João de Souza Morais Neto
+//  email: joaomoraisneto2000@gmail.com
 //  Matrícula:
 //  Semestre:
 
@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include "Trabalho1N.h" // Substitua pelo seu arquivo de header renomeado
 #include <stdlib.h>
+#include <string.h>
 
 DataQuebrada quebraData(char data[]);
 
@@ -179,6 +180,8 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
     //calcule os dados e armazene nas três variáveis a seguir
     DiasMesesAnos dma;
 
+    int conti=0,bissexto;
+    
     if (q1(datainicial) == 0){
       dma.retorno = 2;
       return dma;
@@ -186,18 +189,127 @@ DiasMesesAnos q2(char datainicial[], char datafinal[])
       dma.retorno = 3;
       return dma;
     }else{
-      //verifique se a data final não é menor que a data inicial
-      
-      //calcule a distancia entre as datas
 
+
+      char sdia[10],smes[10],sano[10];
+
+    int j=0;
+    for(int i=0;datainicial[i]!='/';i++)
+    {
+        sdia[j]=datainicial[i];
+        j++;
+        conti=i;
+    }
+
+    j=0;
+    for(int i=conti+2;datainicial[i]!='/';i++){
+        smes[j]=datainicial[i];
+        j++;
+        conti=i;
+    }
+
+    smes[j] = '\0';
+
+    j=0;
+    for(int i=conti+2;datainicial[i]!='\0';i++){
+        sano[j]=datainicial[i];
+        j++;
+        conti=i;
+    }
+
+    sano[j]='\0';
+
+    int dia1 = atoi(sdia);
+    int mes1 = atoi(smes);
+    int ano1 = atoi(sano);
+
+    //----------------------------------------------Data final-----------------------------------------------------
+
+    j=0;
+    for(int i=0;datafinal[i]!='/';i++)
+    {
+        sdia[j]=datafinal[i];
+        j++;
+        conti=i;
+    }
+
+
+    j=0;
+    for(int i=conti+2;datafinal[i]!='/';i++){
+        smes[j]=datafinal[i];
+        j++;
+        conti=i;
+    }
+
+    smes[j] = '\0';
+
+    j=0;
+    for(int i=conti+2;datafinal[i]!='\0';i++){
+        sano[j]=datafinal[i];
+        j++;
+        conti=i;
+    }
+
+    sano[j]='\0';
+
+    int dia2 = atoi(sdia);
+    int mes2 = atoi(smes);
+    int ano2 = atoi(sano);
+
+    int diames[13] = {31, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+    if ((ano2 % 4 == 0 && ano2 % 100 != 0) || (ano2 % 400 == 0)){
+      diames[3] = 29;
+    }
+    
+      //verifique se a data final não é menor que a data inicial
+      if(ano2<ano1){
+        dma.retorno = 4;
+        return dma;
+      }
+      else if(ano1==ano2 && mes1>mes2){
+        dma.retorno = 4;
+        return dma;
+      }
+      else if(ano1==ano2 && mes1==mes2 && dia1>dia2){
+        dma.retorno = 4;
+        return dma;
+      }
+      //calcule a distancia entre as datas
+      else{
+        int ano = ano2 - ano1;
+        int mes = mes2 - mes1;
+        int dia = dia2 - dia1;
+
+        if(dia<0){
+          mes--;
+          dia = dia + diames[mes2-1];
+        }
+        if(mes<0){
+          ano--;
+          mes = mes + 12;
+        }
+
+        dma.qtdAnos=ano;
+        dma.qtdMeses=mes;
+        dma.qtdDias=dia;
+
+      }
 
       //se tudo der certo
       dma.retorno = 1;
       return dma;
       
+
+      }
+
+
+
     }
+
     
-}
+ 
+
 
 /*
  Q3 = encontrar caracter em texto
@@ -244,7 +356,9 @@ int q3(char *texto, char c, int isCaseSensitive)
     uma string texto base (strTexto), uma string strBusca e um vetor de inteiros (posicoes) que irá guardar as posições de início e fim de cada ocorrência da palavra (strBusca) no texto base (texto).
  @saida
     Um número n >= 0 correspondente a quantidade de ocorrências encontradas.
-    O vetor posicoes deve ser preenchido com cada entrada e saída correspondente. Por exemplo, se tiver uma única ocorrência, a posição 0 do vetor deve ser preenchido com o índice de início do texto, e na posição 1, deve ser preenchido com o índice de fim da ocorrencias. Se tiver duas ocorrências, a segunda ocorrência será amazenado nas posições 2 e 3, e assim consecutivamente. Suponha a string "Instituto Federal da Bahia", e palavra de busca "dera". Como há uma ocorrência da palavra de busca no texto, deve-se armazenar no vetor, da seguinte forma:
+    O vetor posicoes deve ser preenchido com cada entrada e saída correspondente. Por exemplo, se tiver uma única ocorrência, a posição 0 do vetor deve ser preenchido com o índice de início do texto, e na posição 1, 
+    deve ser preenchido com o índice de fim da ocorrencias. Se tiver duas ocorrências, a segunda ocorrência será amazenado nas posições 2 e 3, e assim consecutivamente. Suponha a string "Instituto Federal da Bahia", 
+    e palavra de busca "dera". Como há uma ocorrência da palavra de busca no texto, deve-se armazenar no vetor, da seguinte forma:
         posicoes[0] = 13;
         posicoes[1] = 16;
         Observe que o índice da posição no texto deve começar ser contado a partir de 1.
@@ -253,9 +367,55 @@ int q3(char *texto, char c, int isCaseSensitive)
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30])
 {
-    int qtdOcorrencias = -1;
+    int qtdOcorrências = 0;
+    char strTexto1[250];
+    int j=0;
+    int contp = 0;
 
-    return qtdOcorrencias;
+    for(int i=0;i < strlen(strTexto);i++)
+    {
+        if(strTexto[i]!=-61)
+        {
+            strTexto1[j]=strTexto[i];
+            j++;
+        }    
+    }
+    strTexto1[j] = '\0';
+
+    for(int i=0;i < strlen(strTexto1);i++)
+    {
+        int achou=0;
+        if(strTexto1[i] == strBusca[0])
+        {
+            int cont=1;
+            for(j=i+1; cont < strlen(strBusca);j++)
+            {
+                if(strTexto1[j]==strBusca[cont]){
+                    cont++;
+                }
+                else
+                    break;
+
+            }
+
+            if(cont == strlen(strBusca)){
+              achou = 1;
+              qtdOcorrências++;
+            }
+              
+            
+
+        }
+        if(achou)
+        {
+            posicoes[contp]=i+1;
+            posicoes[contp+1]=i+(strlen(strBusca));
+            contp = contp+2;
+        }
+    }
+
+    return qtdOcorrências;
+
 }
 
 /*
@@ -278,21 +438,22 @@ int q5(int num)
     d=((num%1000)%100)/10;
     u=((num%1000)%100)%10;
     num=u*1000+d*100+c*10+m;
-}
-else if(num>=100){
-    c=num/100;
-    d=(num%100)/10;
-    u=(num%100)%10;
-    num=u*100+d*10+c;
-}
-else if(num>=10){
-    d=num/10;
-    u=num%10;
-    num=u*10+d;
-}
-else{
-    u=num;
-}
+  }
+  else if(num>=100){
+      c=num/100;
+      d=(num%100)/10;
+      u=(num%100)%10;
+      num=u*100+d*10+c;
+  }
+
+  else if(num>=10){
+      d=num/10;
+      u=num%10;
+      num=u*10+d;
+  }
+  else{
+      u=num;
+  }
   
 }
 

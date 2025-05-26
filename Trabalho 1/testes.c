@@ -83,7 +83,7 @@
 
 }*/
 
-int main(){
+/*int main(){
 
     int c=0,d=0,u=0,m=0;
     int num=4560;
@@ -116,5 +116,144 @@ int main(){
     //return num;
     printf("%d",num);
 
-}
+}*/
 
+/*int main(){
+
+    char sdia[10],smes[10],sano[10];
+    int conti;
+    char datainicial[11],datafinal[11];
+    strcpy(datainicial, "01/06/2015");
+    strcpy(datafinal, "01/06/2016");
+
+    int j=0;
+    for(int i=0;datainicial[i]!='/';i++)
+    {
+        sdia[j]=datainicial[i];
+        j++;
+        conti=i;
+    }
+
+
+    j=0;
+    for(int i=conti+2;datainicial[i]!='/';i++){
+        smes[j]=datainicial[i];
+        j++;
+        conti=i;
+    }
+
+    smes[j] = '\0';
+
+    j=0;
+    for(int i=conti+2;datainicial[i]!='\0';i++){
+        sano[j]=datainicial[i];
+        j++;
+        conti=i;
+    }
+
+    sano[j]='\0';
+
+    int dia1 = atoi(sdia);
+    int mes1 = atoi(smes);
+    int ano1 = atoi(sano);
+
+    
+    printf("Dia: %d\n",dia1);
+    printf("Mes: %d\n",mes1);
+    printf("Ano: %d\n\n",ano1);
+
+    j=0;
+    for(int i=0;datafinal[i]!='/';i++)
+    {
+        sdia[j]=datafinal[i];
+        j++;
+        conti=i;
+    }
+
+
+    j=0;
+    for(int i=conti+2;datafinal[i]!='/';i++){
+        smes[j]=datafinal[i];
+        j++;
+        conti=i;
+    }
+
+    smes[j] = '\0';
+
+    j=0;
+    for(int i=conti+2;datafinal[i]!='\0';i++){
+        sano[j]=datafinal[i];
+        j++;
+        conti=i;
+    }
+
+    sano[j]='\0';
+
+    int dia2 = atoi(sdia);
+    int mes2 = atoi(smes);
+    int ano2 = atoi(sano);
+
+    printf("Dia: %d\n",dia2);
+    printf("Mes: %d\n",mes2);
+    printf("Ano: %d\n\n",ano2);
+
+}*/
+
+int main(){
+
+    char strTexto[250];
+    char strTexto1[250];
+    char strBusca[50];
+    int posicoes[30];
+    int j=0;
+    int contp = 0;
+
+    strcpy(strTexto, "Olá, o mundo é muito grande. Tem muitas pessoas, e muitos problemas");
+    strcpy(strBusca, "mui");
+
+    for(int i=0;i < strlen(strTexto);i++)
+    {
+        if(strTexto[i]!=-61)
+        {
+            strTexto1[j]=strTexto[i];
+            j++;
+        }    
+    }
+    strTexto1[j] = '\0';
+
+    for(int i=0;i < strlen(strTexto1);i++)
+    {
+        int achou=0;
+        if(strTexto1[i] == strBusca[0])
+        {
+            int cont=1;
+            for(j=i+1; cont < strlen(strBusca);j++)
+            {
+                if(strTexto1[j]==strBusca[cont]){
+                    cont++;
+                }
+                else
+                    break;
+
+            }
+
+            if(cont == strlen(strBusca))
+                achou = 1;
+
+        }
+        if(achou)
+        {
+            posicoes[contp]=i+1;
+            posicoes[contp+1]=i+(strlen(strBusca));
+            contp = contp+2;
+        }
+    }
+
+    printf("posicao 0: %d\n",posicoes[0]);
+    printf("posicao 1: %d\n",posicoes[1]);
+    printf("posicao 2: %d\n",posicoes[2]);
+    printf("posicao 3: %d\n",posicoes[3]);
+    printf("posicao 4: %d\n",posicoes[4]);
+    printf("posicao 5: %d\n",posicoes[5]);
+
+}
