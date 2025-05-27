@@ -469,7 +469,42 @@ int q5(int num)
 
 int q6(int numerobase, int numerobusca)
 {
-    int qtdOcorrencias;
+    int qtdOcorrencias = 0, cont, i;
+    char strbase[10], strbusca[6];
+
+    if(numerobusca<10)
+    {
+      itoa(numerobase, strbase, 10);
+      itoa(numerobusca, strbusca, 10);
+
+      for(i=0;i<strlen(strbase);i++)
+      {
+        if(strbase[i]==strbusca[0])
+          qtdOcorrencias++;
+      }
+    }
+    else
+    {
+
+    itoa(numerobase, strbase, 10);
+    itoa(numerobusca, strbusca, 10);
+
+    for(int i=0;i<strlen(strbase);i++)
+      cont = 1;
+      if(strbase[i]==strbusca[0])
+        {
+          for(int j=i+1;cont<strlen(strbusca);j++)
+          {
+            if(strbase[j]==strbusca[cont]){
+              cont++;
+            }
+          }
+          if(cont==strlen(strbusca))
+            qtdOcorrencias++;
+        }
+      }
+
+
     return qtdOcorrencias;
 }
 
@@ -485,7 +520,151 @@ int q6(int numerobase, int numerobusca)
 
  int q7(char matriz[8][10], char palavra[5])
  {
-     int achou;
+     int achou = 0, j ,l , i;
+     char clone[6];
+
+
+    for(int i=0;i<8;i++)
+    {
+        for(int j=0;j<10;j++)
+        {
+            if (matriz[i][j]==palavra[0])
+            {
+                int cont = 1;
+                for(int k=j+1;cont<strlen(palavra);k++)
+                {
+                    if(palavra[cont]==matriz[i][k])
+                    {
+                        cont++;
+                    }
+                    else break;
+                }
+                if(cont==strlen(palavra))
+                    achou=1;
+            }
+        }
+      }
+
+    if(achou==0)                                   
+    {
+      for(int i=4,j=0;j<strlen(palavra);i--,j++){        //função para inverter as strings caso nao ache
+        clone[j]=palavra[i];
+      }
+      clone[5]='\0';
+    }
+
+    //verificação após inversão
+    for(int i=0;i<8;i++)
+    {
+        for(int j=0;j<10;j++)
+        {
+            if (matriz[i][j]==clone[0])
+            {
+                int cont = 1;
+                for(int k=j+1;cont<strlen(clone);k++)
+                {
+                    if(clone[cont]==matriz[i][k])
+                    {
+                        cont++;
+                    }
+                    else break;
+                }
+                if(cont==strlen(clone))
+                    achou=1;
+            }
+        }
+    }
+
+    //diagonal - cima esqueda
+    for(i=0;i<8;i++)
+    {
+        for(j=0;j<10;j++)
+        {
+            if (matriz[i][j]==palavra[0])
+            {
+                int cont = 1;
+                for(int k=j-1,l=i-1;cont<strlen(palavra);k--,l--)
+                {
+                    if(palavra[cont]==matriz[l][k])
+                    {
+                        cont++;
+                    }
+                    else break;
+                }
+                if(cont==strlen(palavra))
+                    achou=1;
+            }
+        }
+    }
+
+    //diagonal baixo direita
+    for(i=0;i<8;i++)
+    {
+        for(j=0;j<10;j++)
+        {
+            if (matriz[i][j]==palavra[0])
+            {
+                int cont = 1;
+                for(int k=j+1,l=i+1;cont<strlen(palavra);k++,l++)
+                {
+                    if(palavra[cont]==matriz[l][k])
+                    {
+                        cont++;
+                    }
+                    else break;
+                }
+                if(cont==strlen(palavra))
+                    achou=1;
+            }
+        }
+    }
+      
+    //diagonal cima direita
+    for(i=0;i<8;i++)
+    {
+        for(j=0;j<10;j++)
+        {
+            if (matriz[i][j]==palavra[0])
+            {
+                int cont = 1;
+                for(int k=j+1,l=i-1;cont<strlen(palavra);k++,l--)
+                {
+                    if(palavra[cont]==matriz[l][k])
+                    {
+                        cont++;
+                    }
+                    else break;
+                }
+                if(cont==strlen(palavra))
+                    achou=1;
+            }
+        }
+    }
+
+    //diagonal baixo esquerda
+    for(i=0;i<8;i++)
+    {
+        for(j=0;j<10;j++)
+        {
+            if (matriz[i][j]==palavra[0])
+            {
+                int cont = 1;
+                for(int k=j-1,l=i+1;cont<strlen(palavra);k--,l++)
+                {
+                    if(palavra[cont]==matriz[l][k])
+                    {
+                        cont++;
+                    }
+                    else break;
+                }
+                if(cont==strlen(palavra))
+                    achou=1;
+            }
+        }
+    }
+
+  
+
      return achou;
  }
 

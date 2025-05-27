@@ -40,8 +40,8 @@ int main()
     testQ3();
     testQ4();
     testQ5();
-    //testQ6();
-    //testQ7();
+    testQ6();
+    testQ7();
 }
 
 void testSomar()
@@ -205,10 +205,13 @@ void testQ7()
     };
     char stringBusca [6] = { 'F', 'E', 'H', 'S', 'K'};
     printf("%d\n", q7(matrix, stringBusca) == 1);
+
     strcpy(stringBusca, "KJQRT");
     printf("%d\n", q7(matrix, stringBusca) == 1);
+
     strcpy(stringBusca, "AATOK");
     printf("%d\n", q7(matrix, stringBusca) == 0);
+    
     strcpy(stringBusca, "LTBON");
     printf("%d\n", q7(matrix, stringBusca) == 1);
 
