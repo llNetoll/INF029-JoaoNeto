@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+/*void criarvetor(){
+    float *v1 = (float*) malloc(10 * sizeof(float));
+    float *v2;
+
+    v1 = v2;
+}*/
+
+/*void func(int *v){
+    int *v;
+    v= (int*) malloc(sizeof(int));
+}
+
+int main(){
+
+    int *k;
+    func(&k);
+    return 0;
+
+}*/
+
+typedef struct lista{
+    int *vetorPrincipal[10];
+    int tamanhoEstrutura[10];
+    int quantidadeElementos[10];
+}ListaPrincipal;
+
+void pegaDados(ListaPrincipal li,int vetoraux[]){
+    int x=0;
+
+    for(int i=9;i>=0;i--)
+    {
+        if(li.quantidadeElementos[i]>0){
+            for(int j=li.quantidadeElementos-1;j>=0;j--){
+                vetoraux[x] = li.vetorPrincipal[i][j];
+                x++;
+            }
+        }
+    }
+
+}
